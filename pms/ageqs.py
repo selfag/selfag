@@ -60,7 +60,9 @@ def datediff(d1,m1,y1,d2,m2,y2):
 			years=y2-y1
 			months=m2-m1
 			days=d2-d1
-		#print(f"{years} years {months} months {days} days")
+	return years, months, days
+age=datediff(15,1,1975,4,2,2022)
+print(f"{years} years {months} months {days} days")
 
 '''d1,m1,y1= [int(x) for x in input("Enter Date of Birth: (dd/mm/yyyy)").split('/')]
 d2,m2,y2= [int(x) for x in input("Enter Date of Appointment: (dd/mm/yyyy)").split('/')]
