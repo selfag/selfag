@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     #myapps
     'pms.apps.PmsConfig',
     'bootstrap5',
+    'accounts.apps.AccountsConfig',
     
 ]
 
