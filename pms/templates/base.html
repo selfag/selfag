@@ -11,11 +11,16 @@
     <div class="col-sm-2 bg-info">
       <h3>Main Menu</h3>
       <ul>
-      <li><a href="accounts/register">Register</a></li>
-      <li><a href="accounts/login">Login</a></li>
-      <li><a href="/">Main Page</a></li>
-      <li><a href="add_new">Add New</a></li>
-      <li><a href="home">View All</a></li> </ul>
+        {% if user.is_authenticated %}
+        {{user.first_name}} {{user.last_name}}
+        <li><a href="accounts/logout">Logout</a></li>
+        <li><a href="/">Main Page</a></li>
+        <li><a href="add_new">Add New</a></li>
+        <li><a href="home">View All</a></li> </ul>
+        {% else %}
+        <li><a href="accounts/register">Register</a></li>
+        <li><a href="accounts/login">Login</a></li>
+      {% endif %}
     </div>
   <div class="fluid-container col-sm-8">
   {% block content %}

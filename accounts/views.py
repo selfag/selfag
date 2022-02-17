@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
@@ -36,11 +37,13 @@ def register(request):
                 return render(request, 'register.html')
             user=User.objects.create_user(username=username,first_name=first_name, last_name=last_name, password=password1,email=email)
             user.save()
-            return redirect("login.html")
+            return render(request, "login.html")
         else:
             messages.info(request, "Password not matching")
             return render(request, 'register.html')
-    return render(request, 'login.html')
+    return render(request, 'register.html')
 
 
-    
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
