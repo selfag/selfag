@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% if user.is_authenticated %}
 <p class="h1 bg-success">Wellcome to Pensioner management system</p>
 
 <table class="table table-striped table-bordered table-hover">
@@ -14,6 +14,7 @@
         <th>Date of Birth</th>
         <th>Date of Appointment</th>
         <th>Date of Retirement</th>
+        <th>Action</th>
         
         
     </tr>
@@ -28,11 +29,14 @@
         <td>{{i.dob}}</td>
         <td>{{i.doa}}</td>
         <td>{{i.dor}}</td>
+        <td><a href="revise/{{i.id}}">Update</a></td>
 
         
     </tr>
     {% endfor %}
 </table>
-  
+{% else %}
+<p> You are not authorized to access this page</p>
+{% endif %}
 
 {% endblock content %}

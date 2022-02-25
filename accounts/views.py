@@ -15,7 +15,7 @@ def login(request):
             return redirect('/')
            
         else:
-            messages.info(request, "creditial are invalid")
+            messages.info(request, "Creditials are invalid")
             return render(request, 'login.html')
     return render(request, 'login.html')
 

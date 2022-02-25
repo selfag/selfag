@@ -5,43 +5,38 @@
             <h1>Pension Management System</h1>
         </div>
     
-                <h3>Add New Pensioner</h3>
+                <h3>Update Pensioner</h3>
             <div class="row">    
-            <form class="form-group inline-block" action="add_new" method="POST" class="form-inline">
+            <form class="form-group inline-block" action="update/{{pensioner.id}}" method="POST" class="form-inline">
             {% csrf_token %}
-           
+            
              <div class="col">
             <label for="name" class="col-sm">Name</label></div>
             <div class="col">
-            <input type="text" name="name" placeholder="Name" id="name" required></div>
+            <input type="text" name="name" value="{{pensioner.name}}" id="name" required></div>
             
             <div class="col">
             <label for="pay" class="col-sm">Basic Pay</label></div>
             <div class="col">
-            <input type="integer" name="pay" placeholder="Pay" id="pay" required></div>
+            <input type="integer" name="pay" value="{{pensioner.pay}}" id="pay" required></div>
             
             <div class="col">
             <label for="dob">Date of Birth</label></div>
             <div class="col">
-            <input type="text" name="dob" placeholder="Enter Date of Birth: (dd-mm-yyyy)" required></div>
+            <input type="text" name="dob" value="{{pensioner.dob}}" required></div>
             
             <div class="col">
             <label for="doa">Date of Appointment</label></div>
             <div class="col">
-            <input type="text" name="doa" placeholder="Enter Date of Appointment: (dd-mm-yyyy)" required></div>
+            <input type="text" name="doa" value="{{pensioner.doa}}" required></div>
             
             <div class="col">
             <label for="dor">Date of Retirement</label></div>
             <div class="col">
-            <input type="text" name="dor" placeholder="Enter Date of Retirement: (dd-mm-yyyy)" required></div>
+            <input type="text" name="dor" value="{{pensioner.dor}}" required></div>
             
-            <button type="submit" class="btn btn-success">Add</button>
+            <button type="submit" class="btn btn-success">Update</button>
             
-            </form>
-            <form method="post" action="add_new">
-              {% csrf_token %}
-              {{ form.as_p }}
-              {{form.name}}
             </form>
           </div>
               
