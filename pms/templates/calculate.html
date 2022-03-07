@@ -7,7 +7,7 @@
     
                 <h3>Update Pensioner</h3>
             <div class="row">    
-            <form class="form-group inline-block" action="/update/{{pensioner.id}}" method="POST" class="form-inline">
+            <form class="form-group inline-block" action="/calculator/{{pensioner.id}}" method="POST" class="form-inline">
             {% csrf_token %}
             
              <div class="col">
@@ -35,7 +35,7 @@
             <div class="col">
             <input type="text" name="dor" value="{{pensioner.dor}}" required></div>
             
-            <button type="submit" class="btn btn-success">Update</button>
+            <button type="submit" class="btn btn-success">Calculate Pension</button>
             
             </form>
           </div>

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
+{% load humanize %}
 <p class="h1 bg-success">Wellcome to Pensioner management system</p>
 
 <table class="table table-striped table-bordered table-hover">
@@ -22,14 +23,15 @@
     <tr>
         <td>{{i.id}}</td>
         <td>{{i.name}}</td>
-        <td>{{i.pay}}</td>
+        <td>{{i.pay | intcomma}}</td>
         <td>{{i.age}}</td>
         <td>{{i.qs}}</td>
         <td>{{i.comm_rate}}</td>
         <td>{{i.dob}}</td>
         <td>{{i.doa}}</td>
         <td>{{i.dor}}</td>
-        <td><a href="revise/{{i.id}}">Update</a></td>
+        <td><a href="revise/{{i.id}}">Update</a>/<a href="calculate/{{i.id}}">Calculate Pension</a></td>
+        
 
         
     </tr>

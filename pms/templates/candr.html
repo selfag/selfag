@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load humanize %}
+        {% block content %}
+        <p class="h2 display centre">Calculation & Review Sheet</p>
+        <form action="/candr" method="POST">
+                {% csrf_token %}
+                <input type="integer" name="number" placeholder="Pensioner Id">
+                <button type="submit">Get C&R</button>
+        </form>
+        
+        <div>
+                    <table class="table table-bordered">
+                        {% for i in pensioner %}
+                      
+                         <tr><td>Name</td> <td>{{i.name}}</td></tr>
+                         <tr><td>Pay</td> <td>{{i.pay|intcomma}}</td></tr>
+                         <tr><td>Date of Birth</td> <td>{{i.dob}}</td></tr>
+                         <tr><td>Date of Appointment</td> <td>{{i.doa}}</td></tr>
+                         <tr><td>Date of Retirement</td> <td>{{i.dor}}</td></tr>
+                         <tr><td>Age of Retirement</td> <td>{{i.age}}</td></tr>
+                         <tr><td>Qualifying Service</td> <td>{{i.qs}}</td></tr>
+                         <tr><td>Commutation Rate</td> <td>{{i.comm_rate}}</td></tr>
+                         <tr><td>Commutation</td> <td>{{i.comm_amount|intcomma}}</td></tr>
+                         <tr><td>Gross Pension</td> <td>{{i.gp|intcomma}}</td></tr>
+                         <tr><td>Net Pension</td> <td>{{i.np|intcomma}}</td></tr>
+                           
+                            
+                    
+                            
+                      
+                        {% endfor %}
+                    </table>
+        </div>
+        
+      
+        {% endblock content %}
+     
