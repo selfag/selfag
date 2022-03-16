@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 {% block title %} Pensioner Management System {% endblock title %}
         {% block content %}
-        <div class="container-fluid p-1 bg-primary text-white text-center">
-            <h1>Pension Management System</h1>
-        </div>
-    
-                <h3>Update Pensioner</h3>
-            <div class="row">    
+        
+                <h3>Revise Pensioner</h3>
+            <div class="row">  
+            
+              <form action="revise" method="POST" >
+                {% csrf_token %}
+                <input type="integer" name="id"  placeholder="Pensioner ID" required>
+                <button type="submit" class="btn btn-success">Pensioner ID</button>
+              </form> 
+            
+            {% for pensioner in pensioner %}
             <form class="form-group inline-block" action="/update/{{pensioner.id}}" method="POST" class="form-inline">
             {% csrf_token %}
             
@@ -38,6 +43,7 @@
             <button type="submit" class="btn btn-success">Update</button>
             
             </form>
+            {% endfor %}
           </div>
               
             
