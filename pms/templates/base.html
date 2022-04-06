@@ -12,16 +12,16 @@
   {% include 'navbar.html' %}
 
   <div class="row">
-    <div class="col-sm-2 bg-white flex-column">
+    <div class="col-sm-2 bg-ligth flex-column">
       <h3>Main Menu</h3>
       
       <ul>
         {% if user.is_authenticated %}
-        {{user.first_name}} {{user.last_name}}
-        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+       
         <li><a href="/">Main Page</a></li>
         <li><a href="{% url 'pms:add_new' %}">Add New</a></li>
         <li><a href="{% url 'pms:home' %}">View All</a></li>
+        <li><a href="{% url 'pms:revise' %}">Revise/Update</a></li>
         <li><a href="{% url 'pms:calculate' %}">Calculate Pension</a></li>
         <li><a href="{% url 'pms:candr' %}">C & R</a></li> 
         

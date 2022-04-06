@@ -3,47 +3,32 @@
         {% block content %}
         
                 <h3>Calculate Pension</h3>
-            <div class="row">
-            
+           
+           <div class="container">
               <form action="calculate" method="POST" >
                 {% csrf_token %}
+                <button type="submit" class="btn btn-info">Pensioner ID</button>
                 <input type="integer" name="id"  placeholder="Pensioner ID" required>
-                <button type="submit">Pensioner ID</button>
-              </form> 
+                   
+              </form></div> 
+              <div class="container" style="height: auto; width:500px; float:left" > 
             {% for pensioner in pensioner %}
             <form class="form-group inline-block" action="/calculator/{{pensioner.id}}" method="POST" class="form-inline">
             {% csrf_token %}
             
-             <div class="col">
-            <label for="name" class="col-sm">Name</label></div>
-            <div class="col">
-            <input type="text" name="name" value="{{pensioner.name}}" id="name" required></div>
+            <table class="table table-borderless table-responsive">
+            <tr><td><label for="name">Name</label></td><td> <input type="text" name="name" value="{{pensioner.name}}" id="name" required></td></tr>
+            <tr><td><label for="pay" class="col-sm">Basic Pay</label></td><td> <input type="integer" name="pay" value="{{pensioner.pay}}" id="pay" required></td></tr>
+            <tr><td><label for="dob">Date of Birth</label></td><td> <input type="text" name="dob" value="{{pensioner.dob}}" required></td></tr>
+            <tr><td><label for="doa">Date of Appointment</label></td><td> <input type="text" name="doa" value="{{pensioner.doa}}" required></td></tr>
+            <tr><td><label for="dor">Date of Retirement</label></td><td> <input type="text" name="dor" value="{{pensioner.dor}}" required></td></tr>
+            <tr><td colspan="2" style="text-align: center;"><button type="submit" class="btn btn-success">Calculate Pension</button></td></tr>
             
-            <div class="col">
-            <label for="pay" class="col-sm">Basic Pay</label></div>
-            <div class="col">
-            <input type="integer" name="pay" value="{{pensioner.pay}}" id="pay" required></div>
-            
-            <div class="col">
-            <label for="dob">Date of Birth</label></div>
-            <div class="col">
-            <input type="text" name="dob" value="{{pensioner.dob}}" required></div>
-            
-            <div class="col">
-            <label for="doa">Date of Appointment</label></div>
-            <div class="col">
-            <input type="text" name="doa" value="{{pensioner.doa}}" required></div>
-            
-            <div class="col">
-            <label for="dor">Date of Retirement</label></div>
-            <div class="col">
-            <input type="text" name="dor" value="{{pensioner.dor}}" required></div>
-            
-            <button type="submit" class="btn btn-success">Calculate Pension</button>
-            
+            </table>
             </form>
-          {% endfor %}
           </div>
+          {% endfor %}
+         
               
             
             

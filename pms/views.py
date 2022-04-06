@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Pensioner
 from datetime import datetime, date
+from django.db.models import Sum
 
 
 
@@ -10,7 +11,11 @@ from datetime import datetime, date
 
 # Create your views here.
 def welcome(request):
-    return render(request, 'welcome.html')
+    pensioner=Pensioner.objects.count()
+    netpension=Pensioner.objects.all().aggregate(tp=Sum('np'))
+    lts=Pensioner.objects.latest('id')
+    oldage=Pensioner.objects.filter(tp__lte=50000).count()
+    return render(request, 'welcome.html',{'pensioner':pensioner, 'netpension': netpension,'lts':lts, 'oldage':oldage})
 def add_new(request):
     if request.method=="POST":
         name=request.POST['name']
@@ -547,23 +552,7 @@ def calculator(request, id):
                 wef=date(2021,7,1).strftime("%d-%m-%Y")
             inc.append([wef,inc21,np])
             tp=np+ma2010+ma2015
-        '''increase=Increase.objects.all()
-        r=[]
-        r=[0.15, 0.075, 0.1, 0.1, 0.1, 0.1, 0.1]
-        inc=['inc11', 'inc15', 'inc16', 'inc17', 'inc18', 'inc19', 'inc21']
-        incdict={}
-        nnp=np
-        for (i,ic) in zip(r,inc):
-            incr=round(nnp*i,2)
-            incdict[ic]=incr
-            nnp=round(nnp+incr)
-        inc11=incdict["inc11"]
-        inc15=incdict["inc15"]
-        inc16=incdict["inc16"]
-        inc17=incdict["inc17"]
-        inc18=incdict["inc18"]
-        inc19=incdict["inc19"]
-        inc21=incdict["inc21"]'''
+       
         pensioner=Pensioner.objects.filter(id=id).update(name=name, pay=pay, dob=dob, doa=doa, dor=dor, age=age,qs=qs, comm_rate=comm_rate, gp=gp, np=npo, comm_amount=comm_amount,inc03=inc03, inc04=inc04, inc05=inc05, inc06=inc06, inc07=inc07, inc08=inc08, inc09=inc09, inc10=inc10, inc11=inc11, inc12=inc12, inc13=inc13, inc14=inc14, inc15=inc15,inc16=inc16,inc17=inc17,inc18=inc18,inc19=inc19,inc21=inc21, ma2010=ma2010, ma2015=ma2015, tp=tp)
         
         return redirect("/candr")

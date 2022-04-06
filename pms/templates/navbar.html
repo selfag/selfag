@@ -1,9 +1,9 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-white bg-gradient">
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <img src="{% static 'img/favicon.jpg' %}" alt="" width="50" height="40" class="d-inline-block align-text-top">
-          PMS</a><h1 class="">Pension Management System</h1>
+          PMS</a><h1 class="display-5 ">Pension Management System</h1>
       <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,17 +29,17 @@
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
-        </ul> -->
+        </ul> 
         <div>
         <form class="d-flex " action="/candr" method="POST">
             {% csrf_token %}
           <input class="form-control me-2" type="integer" name="number" placeholder="Pensioner ID" aria-label="Search" required>
           <button class="btn" type="submit">Search</button>
         </form>
-      </div>
+      </div> -->
       <div> 
         {% if user.is_authenticated %}
-        {{user.first_name}} {{user.last_name}}
+        {{user.first_name}} {{user.last_name}}<br>
         <a href="{% url 'accounts:logout' %}">Logout</a>
         {% endif %}
       </div>

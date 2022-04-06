@@ -3,46 +3,39 @@
         {% block content %}
         
     
-                <h3>Add New Pensioner</h3>
-            <div class="row">    
-            <form class="form-group inline-block" action="add_new" method="POST" class="form-inline">
-            {% csrf_token %}
-           
-             <div class="col">
-            <label for="name" class="col-sm">Name</label></div>
-            <div class="col">
-            <input type="text" name="name" placeholder="Name" id="name" required></div>
+                <h3 style="text-align:center">Add New Pensioner</h3>
+              <div class="row">
+                <div class="container">
+                  <form class="form-group inline-block" action="add_new" method="POST" class="form-inline">
+                    {% csrf_token %}
+                   
+                    <table class="table table-responsive table-borderless">
+                    <tr><td><label for="name" >Name</label></td><td><input type="text" name="name" placeholder="Name" id="name" required></td><td><label for="fname" >Father's Name</label></td><td><input type="text" name="fname" placeholder="Father's Name" id="name" required></tr>
+                      <tr><td><label for="name" >BPS No.</label></td><td><input type="text" name="pbs" placeholder="BPS No." id="name" required></td><td><label for="fname" >Designation</label></td><td><input type="text" name="designation" placeholder="Designation" id="name" required></tr>
+                      <tr><td><label for="name" >CNIC No.</label></td><td><input type="text" name="cnic" placeholder="CNIC No." id="name" required></td><td><label for="fname" >Address</label></td><td><input type="text" name="address" placeholder="Address" id="name" required></tr>
+                        <tr><td><label for="pay" >Basic Pay</label></td><td><input type="integer" name="pay" placeholder="Pay" id="pay" required></td><td><label for="fname" >Qualification Pay</label></td><td><input type="text" name="qp" placeholder="Qualification Pay" id="name" required></tr>
+                    
+                    
+                    
+                    
+                    <tr></tr>
+                    
+                    <tr><td><label for="dob">Date of Birth</label></td><td><input type="text" name="dob" placeholder="(dd-mm-yyyy)" required></td></tr></div>
+                    
+                    <tr><td><label for="doa">Date of Appointment</label></td><td><input type="text" name="doa" placeholder="(dd-mm-yyyy)" required></td></tr>
+                    <tr><td><label for="dor">Date of Retirement</label></td><td><input type="text" name="dor" placeholder="(dd-mm-yyyy)" required></td></tr>
+                    <tr><td colspan="2" style="text-align:center"><button type="submit" class="btn btn-success">Add</button></td></tr>
+                  </table>
+                
+                    </form>
+                </div>
+                
+                
+              </div>  
             
-            <div class="col">
-            <label for="pay" class="col-sm">Basic Pay</label></div>
-            <div class="col">
-            <input type="integer" name="pay" placeholder="Pay" id="pay" required></div>
             
-            <div class="col">
-            <label for="dob">Date of Birth</label></div>
-            <div class="col">
-            <input type="text" name="dob" placeholder="Enter Date of Birth: (dd-mm-yyyy)" required></div>
-            
-            <div class="col">
-            <label for="doa">Date of Appointment</label></div>
-            <div class="col">
-            <input type="text" name="doa" placeholder="Enter Date of Appointment: (dd-mm-yyyy)" required></div>
-            
-            <div class="col">
-            <label for="dor">Date of Retirement</label></div>
-            <div class="col">
-            <input type="text" name="dor" placeholder="Enter Date of Retirement: (dd-mm-yyyy)" required></div>
-            
-            <button type="submit" class="btn btn-success">Add</button>
-            
-            </form>
-            <form method="post" action="add_new">
-              {% csrf_token %}
-              {{ form.as_p }}
-              {{form.name}}
-            </form>
-          </div>
-              
+          
+          
             
             
         

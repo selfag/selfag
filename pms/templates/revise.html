@@ -7,8 +7,9 @@
             
               <form action="revise" method="POST" >
                 {% csrf_token %}
+                <button type="submit" class="btn btn-info">Pensioner ID</button>
                 <input type="integer" name="id"  placeholder="Pensioner ID" required>
-                <button type="submit" class="btn btn-success">Pensioner ID</button>
+                
               </form> 
             
             {% for pensioner in pensioner %}
