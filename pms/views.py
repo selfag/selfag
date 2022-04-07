@@ -483,7 +483,7 @@ def calculator(request, id):
                 wef=date(2012,7,1).strftime("%d-%m-%Y")
             inc.append([wef,inc12,np])
         if dr<d2016:
-            inc13=(np*0.10)
+            inc13=round(np*0.10)
             np=np+inc13
             if dr>date(2013,7,1):
                 wef=dr.strftime("%d-%m-%Y")
