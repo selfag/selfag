@@ -4,18 +4,22 @@ from django.shortcuts import render, redirect
 from .models import Pensioner
 from datetime import datetime, date
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 
 
 
 
 
 # Create your views here.
+
 def welcome(request):
     pensioner=Pensioner.objects.count()
     netpension=Pensioner.objects.all().aggregate(tp=Sum('np'))
+    ma=Pensioner.objects.all().aggregate(tma=Sum('ma2010'))
+    ma2=Pensioner.objects.all().aggregate(tma2=Sum('ma2015'))
     lts=Pensioner.objects.latest('id')
     oldage=Pensioner.objects.filter(tp__lte=50000).count()
-    return render(request, 'welcome.html',{'pensioner':pensioner, 'netpension': netpension,'lts':lts, 'oldage':oldage})
+    return render(request, 'welcome.html',{'pensioner':pensioner, 'netpension': netpension,'lts':lts, 'oldage':oldage, 'ma':ma, 'ma2':ma2})
 def add_new(request):
     if request.method=="POST":
         name=request.POST['name']

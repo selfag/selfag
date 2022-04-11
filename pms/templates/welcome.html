@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<p class="display-3 text-info text-center">Dashboard</p>
+<p class="display-5 text-info">Dashboard</p>
 <div class="container">
   <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
     <div class="col bg-info" style="height:150px;">
       <div class="p-3  "> <p>  Total Pensioners: {{pensioner}}</p></div>
     </div>
     <div class="col bg-primary" style="height:150px;">
-      <div class="p-3 "><p>  Total Monthly Pension: {{netpension.tp}}</p></div>
+      <div class="p-3 "><p>  Total Monthly Pension: {{netpension.tp}}</p>
+      <p>Total Medical Allowance 2010:  {{ma.tma}}</p>
+      <p>Total Medical Allowance 2015:  {{ma2.tma2}}</p></div>
     </div>
     <div class="col bg-danger" style="height:150px;">
       <div class="p-3 ">Last Added Pensioner<table class="table table-borderless">
@@ -19,10 +21,10 @@
       <div class="p-3 "><p>Pensioners drawing less than Rs.50000</p>{{oldage}}</div>
     </div>
     <div class="col bg-dark text-white" style="height:150px;">
-      <div class="p-3 ">555</div>
+      <div class="p-3 ">Report</div>
     </div>
     <div class="col bg-warning" style="height:150px;">
-      <div class="p-3 ">666</div>
+      <div class="p-3 ">Report</div>
     </div>
    
   </div>
