@@ -10,20 +10,23 @@
                     {% csrf_token %}
                    
                     <table class="table table-responsive table-borderless">
-                    <tr><td><label for="name" >Name</label></td><td><input type="text" name="name" placeholder="Name" id="name" required></td><td><label for="fname" >Father's Name</label></td><td><input type="text" name="fname" placeholder="Father's Name" id="name" required></tr>
-                      <tr><td><label for="name" >BPS No.</label></td><td><input type="text" name="pbs" placeholder="BPS No." id="name" required></td><td><label for="fname" >Designation</label></td><td><input type="text" name="designation" placeholder="Designation" id="name" required></tr>
-                      <tr><td><label for="name" >CNIC No.</label></td><td><input type="text" name="cnic" placeholder="CNIC No." id="name" required></td><td><label for="fname" >Address</label></td><td><input type="text" name="address" placeholder="Address" id="name" required></tr>
-                        <tr><td><label for="pay" >Basic Pay</label></td><td><input type="integer" name="pay" placeholder="Pay" id="pay" required></td><td><label for="fname" >Qualification Pay</label></td><td><input type="text" name="qp" placeholder="Qualification Pay" id="name" required></tr>
+                      <tr><td><label>PPO No.</label></td><td><input type="text" name="ppo" placeholder="PPO No."></td></tr>
+                    <tr><td><label >Name</label></td><td><input type="text" name="name" placeholder="Name" required></td><td><label >Father's Name</label></td><td><input type="text" name="fname" placeholder="Father's Name"  required></tr>
+                      <tr><td><label  >BPS No.</label></td><td><input type="text" name="bps" placeholder="BPS No." required></td><td><label >Designation</label></td><td><input type="text" name="designation" placeholder="Designation" required></tr>
+                      <tr><td><label  >CNIC No.</label></td><td><input type="text" name="cnic" placeholder="CNIC No."  required></td><td><label >Address</label></td><td><input type="text" name="address" placeholder="Address"  required></tr>
+                        <tr><td><label  >Basic Pay</label></td><td><input type="integer" name="pay" placeholder="Pay" required></td><td><label >Qualification Pay</label></td><td><input type="text" name="qp" placeholder="Qualification Pay" required></tr>
+                          <tr><td><label  >Personal Pay</label></td><td><input type="integer" name="ppay" placeholder="Personal Pay" required></td><td><label >Special Pay</label></td><td><input type="text" name="sp" placeholder="Special Pay" required></tr>
+                            <tr><td><label >Usual Increment</label></td><td><input type="integer" name="ui" placeholder="Usual Increment"  required></td><td><label >Other Pay</label></td><td><input type="text" name="op" placeholder="Other Pay" required></tr>
                     
                     
                     
                     
                     <tr></tr>
                     
-                    <tr><td><label for="dob">Date of Birth</label></td><td><input type="text" name="dob" placeholder="(dd-mm-yyyy)" required></td></tr></div>
+                    <tr><td><label for="dob">Date of Birth</label></td><td><input type="text" name="dob" placeholder="(dd-mm-yyyy)" required></td><td><label>Bank Name</label></td><td><input type="text" name="bname" placeholder="Bank Name" required></td></tr>
                     
-                    <tr><td><label for="doa">Date of Appointment</label></td><td><input type="text" name="doa" placeholder="(dd-mm-yyyy)" required></td></tr>
-                    <tr><td><label for="dor">Date of Retirement</label></td><td><input type="text" name="dor" placeholder="(dd-mm-yyyy)" required></td></tr>
+                    <tr><td><label for="doa">Date of Appointment</label></td><td><input type="text" name="doa" placeholder="(dd-mm-yyyy)" required></td><td><label>Branch Name</label></td><td><input type="text" name="bb" placeholder="Bank Branch" required></td></tr>
+                    <tr><td><label for="dor">Date of Retirement</label></td><td><input type="text" name="dor" placeholder="(dd-mm-yyyy)" required></td><td><label>Account No.</label></td><td><input type="text" name="acctno" placeholder="Account No." required></td></tr>
                     <tr><td colspan="2" style="text-align:center"><button type="submit" class="btn btn-success">Add</button></td></tr>
                   </table>
                 

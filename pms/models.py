@@ -1,8 +1,10 @@
+from pyexpat import model
 from django.db import models
 
 # Create your models here.
 class Pensioner(models.Model):
     name=models.CharField(max_length=200)
+    fname=models.CharField(max_length=200, null=True)
     pay=models.IntegerField(null=True)
     qs=models.CharField(max_length=200, null=True)
     age=models.CharField(max_length=200, null=True)
@@ -34,6 +36,16 @@ class Pensioner(models.Model):
     ma2010=models.FloatField(null=True)
     ma2015=models.FloatField(null=True)
     tp=models.FloatField(null=True)
+    ppo=models.CharField(max_length=9, null=True, unique=True)
+    bps=models.IntegerField(null=True)
+    cnic=models.CharField(max_length=13, null=True, unique=True)
+    qpay=models.IntegerField(null=True)
+    ppay=models.IntegerField(null=True)
+    spay=models.IntegerField(null=True)
+    ui=models.IntegerField(null=True)
+    opay=models.IntegerField(null=True)
+    address=models.CharField(max_length=200, null=True)
+    designation=models.CharField(max_length=50, null=True)
 
     
     def __str__(self):
@@ -47,6 +59,15 @@ class Increase(models.Model):
 
     def __str__(self):
         return self.name
+
+class Bank(models.Model):
+    pensioner=models.ForeignKey(Pensioner, on_delete=models.CASCADE)
+    bname=models.CharField(max_length=10)
+    bb=models.CharField(max_length=20)
+    acctno=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.acctno
 
 
 

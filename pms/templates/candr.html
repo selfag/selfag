@@ -26,7 +26,12 @@
                          <tr><td>Commutation</td> <td>{{i.comm_amount|intcomma}}</td></tr>
                          <tr><td>Gross Pension</td> <td>{{i.gp|intcomma}}</td></tr>
                          <tr><td>Net Pension</td> <td>{{i.np|intcomma}}</td></tr>
-                         
+                         {% for b in bank %}
+                         <tr><td>Bank Branch</td> <td>{{b.bname}}</td></tr>
+                         <tr><td>Bank Branch</td> <td>{{b.bb}}</td></tr>
+                         <tr><td>Bank Branch</td> <td>{{b.acctno}}</td></tr>
+
+                         {% endfor %}
                          <tr>{% if i.inc03%}<td>Increase 2003</td><td>{{i.inc03}}</td>{% endif %}{% if i.inc04 %}<td>Increase 2004</td><td>{{i.inc04}}</td></tr>{% endif %}
                          
                          {% if i.inc05 %}<tr><td>Increase 2005</td><td>{{i.inc05}}</td>{% endif %}{% if i.inc06 %}<td>Increase 2006</td><td>{{i.inc06}}</td></tr>{% endif %}

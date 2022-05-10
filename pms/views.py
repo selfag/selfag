@@ -1,7 +1,7 @@
 from posixpath import split
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Pensioner
+from .models import Pensioner, Bank
 from datetime import datetime, date
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
@@ -13,17 +13,36 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def welcome(request):
+    chart=Pensioner.objects.all()
     pensioner=Pensioner.objects.count()
     netpension=Pensioner.objects.all().aggregate(tp=Sum('np'))
     ma=Pensioner.objects.all().aggregate(tma=Sum('ma2010'))
     ma2=Pensioner.objects.all().aggregate(tma2=Sum('ma2015'))
     lts=Pensioner.objects.latest('id')
     oldage=Pensioner.objects.filter(tp__lte=50000).count()
-    return render(request, 'welcome.html',{'pensioner':pensioner, 'netpension': netpension,'lts':lts, 'oldage':oldage, 'ma':ma, 'ma2':ma2})
+    return render(request, 'welcome.html',{'pensioner':pensioner, 'netpension': netpension,'lts':lts, 'oldage':oldage, 'ma':ma, 'ma2':ma2, 'chart':chart})
 def add_new(request):
     if request.method=="POST":
         name=request.POST['name']
         pay=request.POST['pay']
+        qpay=request.POST['qp']
+        ppay=request.POST['ppay']
+        spay=request.POST['sp']
+        opay=request.POST['op']
+        ui=request.POST['ui']
+        fname=request.POST['fname']
+        ppo=request.POST['ppo']
+        bps=request.POST['bps']
+        cnic=request.POST['cnic']
+        designation=request.POST['designation']
+        address=request.POST['address']
+        bname=request.POST['bname']
+        bb=request.POST['bb']
+        acctno=request.POST['acctno']
+
+
+
+
         d1,m1,y1= [int(x) for x in request.POST['dob'].split('-')]
         d2,m2,y2= [int(x) for x in request.POST['doa'].split('-')]
         d3,m3,y3= [int(x) for x in request.POST['dor'].split('-')]
@@ -106,8 +125,11 @@ def add_new(request):
         s=datediff(d2,m2,y2,d3,m3,y3)
         qs=f"{years}M-{months}M-{days}D"
 
-        new_pensioner=Pensioner.objects.create(name=name, pay=pay, dob=dob, doa=doa, dor=dor, age=age,qs=qs, comm_rate=comm_rate)
+        new_pensioner=Pensioner.objects.create(name=name, pay=pay, dob=dob, doa=doa, dor=dor, age=age,qs=qs, comm_rate=comm_rate, fname=fname, ppo=ppo, bps=bps, designation=designation, address=address, cnic=cnic, qpay=qpay, ppay=ppay,spay=spay,ui=ui, opay=opay)
         new_pensioner.save()
+        p=Pensioner.objects.latest('id')
+        pensioner_id=p.id
+        bank=Bank.objects.create(pensioner_id=pensioner_id,bname=bname, bb=bb, acctno=acctno)
         pensioner=Pensioner.objects.all()
         return redirect("/home")
     else:
@@ -305,7 +327,7 @@ def calculator(request, id):
                     months=m2-m1
                     days=d2-d1
             return years, months, days
-        a=datediff(d1,m1,y1,d3,m3,y3)
+        datediff(d1,m1,y1,d3,m3,y3)
         age=f"{years} Y-{months} M-{days} D"
         age_nb=years+1
         if age_nb>60:
@@ -315,6 +337,8 @@ def calculator(request, id):
         comm_rate=com_table2001[age_nb]
         datediff(d2,m2,y2,d3,m3,y3)
         qs=f"{years} Y-{months} M-{days} D"
+        #age today
+        currentdate=date.today()
         
         if months>=6:
             nqs=years+1
@@ -336,8 +360,13 @@ def calculator(request, id):
         d2015=date(2015,7,1)
         d2016=date(2016,7,1)
         d2017=date(2017,7,1)
-        ma2010=round(np*0.25)
-        ma2015=round(ma2010*0.25)
+        Pensioner.objects.filter(id=id).filter(bps__lt=16)
+        if Pensioner.objects.filter(id=id).filter(bps__lt=16):
+            ma2010=round(np*0.25)
+            ma2015=round(ma2010*0.25)
+        else:
+            ma2010=round(np*0.20)
+            ma2015=round(ma2010*0.20)
         
         inc=[]
         inc03=0
@@ -566,7 +595,8 @@ def candr(request):
         global d
         d=request.POST['number']
         pensioner=Pensioner.objects.filter(id=d)
-        return render(request, 'candr.html', {'pensioner':pensioner})
+        bank=Bank.objects.filter(pensioner_id=d)
+        return render(request, 'candr.html', {'pensioner':pensioner, 'bank':bank})
     else:
         pensioner=Pensioner.objects.all()
         return render(request, 'candr.html')

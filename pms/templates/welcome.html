@@ -3,39 +3,99 @@
 <p class="display-5 text-info">Dashboard</p>
 <div class="container">
   <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
+    
+    <div class="col " >
+      <div id="piechart" style="width: 500px; height: 300px;" class="container col-4 m-25" ><script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+  
+        function drawChart() {
+  
+          var data = google.visualization.arrayToDataTable([
+            ['Payment', 'Monthly'],
+            ['Med All 15',     {{ma2.tma2}}],
+            ['Med All 10',      {{ma.tma}}],
+            ['Net Pension',  {{netpension.tp}}],
+            
+          ]);
+  
+          var options = {
+            title: 'Monthly Payments',
+            
+            pieHole:0.4,
+          };
+  
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  
+          chart.draw(data, options);
+        }
+      </script>
+  </div>
+    </div>
+    <div class="col" >
+      <div class="p-3 ">
+
+        <div id="3dchart" style="width: 500px; height: 300px;" class="container col-4 m-25" ><script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+    
+          function drawChart() {
+    
+            var data = google.visualization.arrayToDataTable([
+              ['Payment', 'Monthly'],
+              ['Med All 15',     {{ma2.tma2}}],
+              ['Med All 10',      {{ma.tma}}],
+              ['Net Pension',  {{netpension.tp}}],
+              
+            ]);
+    
+            var options = {
+              title: 'Monthly Payments',
+              slices:{
+                      1:{offset:0.3},
+                      0:{offset:0.2},
+              },
+            };
+    
+            var chart = new google.visualization.PieChart(document.getElementById('3dchart'));
+    
+            chart.draw(data, options);
+          }
+        </script>
+    </div>
+      </div>
+    </div> 
+    
     <div class="col bg-info" style="height:150px;">
       <div class="p-3  "> <p>  Total Pensioners: {{pensioner}}</p></div>
     </div>
     <div class="col bg-primary" style="height:150px;">
-
+    
       <div class="p-3 "><p>  Total Monthly Pension: {{netpension.tp|floatformat:0}}</p>
       <p>Total Medical Allowance 2010:  {{ma.tma}}</p>
       <p>Total Medical Allowance 2015:  {{ma2.tma2}}</p></div>
-
+    
     </div>
     <div class="col bg-danger" style="height:150px;">
       <div class="p-3 ">Last Added Pensioner<table class="table table-borderless">
         <tr><th>Pensioner ID</th><th>Name</th></tr>
+     
         <tr><td>{{lts.id}}</td><td>{{lts.name}}</td></tr>
+    
       </table></div>
     </div>
     <div class="col bg-success" style="height:150px;">
       <div class="p-3 "><p>Pensioners drawing less than Rs.50000</p>{{oldage}}</div>
     </div>
-    <div class="col bg-dark text-white" style="height:150px;">
-      <div class="p-3 ">Report</div>
-    </div>
-    <div class="col bg-warning" style="height:150px;">
-      <div class="p-3 ">Report</div>
-    </div>
-   
   </div>
+  
 </div>
+
 <div class="row">
     <div class="container col-lg-4">
      
     </div>
-    <div class="containger col-4 m-25" ></div>
+    
 </div>
 
 {% endblock content %}
