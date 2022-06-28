@@ -43,10 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #myapps
     'pms.apps.PmsConfig',
-    'mytables.apps.MytablesConfig',
     'bootstrap5',
     'accounts.apps.AccountsConfig',
-    
     'django.contrib.humanize',
     
 ]
@@ -96,6 +94,7 @@ DATABASES = {
         'PASSWORD':'f2ecbc31e9fdf95951649fe1994f035d8c451ab746731627b55214ec9f476fbd',
         'HOST':'ec2-34-231-183-74.compute-1.amazonaws.com',
         'PORT': '5432',
+
     }
 }
 
