@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #myapps
     'pms.apps.PmsConfig',
+    'mytables.apps.MytablesConfig',
     'bootstrap5',
     'accounts.apps.AccountsConfig',
     
