@@ -11,5 +11,6 @@ urlpatterns=[
     path('update/<int:id>', views.update, name="update"),
     path('calculate', views.calculate, name="calculate"),
     path('calculator/<int:id>', views.calculator, name="calculator"),
-    path('candr', views.candr, name="candr")
+    path('candr', views.candr, name="candr"),
+    path('simple_calculator', views.listcontent, name="simple_calculator")
 ]

@@ -1,78 +1,199 @@
 {% extends "base.html" %}
 {% load static %}
 {% load humanize %}
-        {% block content %}
-        
-        <div class="p-3">
-        <form action="candr" method="POST" >
-            {% csrf_token %}
-            <button type="submit" class="btn btn-info">Pensioner ID</button>
-            <input type="integer" name="number"  placeholder="Pensioner ID" required>
-            
-          </form> </div>
-          <div class="row">
-        
-          <p class="h2 display align-centre">Calculation & Review Sheet</p>
-          <div class="col">        
-            <table class="table table-bordered">
-                        {% if pensioner %}
-                        {% for i in pensioner %}
-                       
-                         <tr><td>Name</td> <td>{{i.name}}</td></tr>
-                         <tr><td>Pay</td> <td>{{i.pay|intcomma}}</td></tr>
-                         <tr><td>Date of Birth</td> <td>{{i.dob}}</td></tr>
-                         <tr><td>Date of Appointment</td> <td>{{i.doa}}</td></tr>
-                         <tr><td>Date of Retirement</td> <td>{{i.dor}}</td></tr>
-                         <tr><td>Age on Retirement</td> <td>{{i.age}}</td></tr>
-                         <tr><td>Qualifying Service</td> <td>{{i.qs}}</td></tr>
-                         <tr><td>Commutation Rate</td> <td>{{i.comm_rate}}</td></tr>
-                         <tr><td>Restoration Due on </td> <td>{{i.restd}}</td></tr>
-                         <tr><td>Commutation</td> <td>{{i.comm_amount|intcomma}}</td></tr>
-                         <tr><td>Gross Pension</td> <td>{{i.gp|intcomma}}</td></tr>
-                         <tr><td>Net Pension</td> <td>{{i.np|intcomma}}</td></tr></table>
-                         {% endfor %}
-                        {% endif %}
-                         <table class="table table-bordered">
-                          {% if pensioner %}
-                          {% for i in pensioner %}
-                         <tr>{% if i.inc03%}<td>Increase 2003</td><td>{{i.inc03}}</td>{% endif %}
-                          {% if i.inc04 %}<td>Increase 2004</td><td>{{i.inc04}}</td></tr>{% endif %}
-                         
-                         {% if i.inc05 %}<tr><td>Increase 2005</td><td>{{i.inc05}}</td>{% endif %}</tr><tr>{% if i.inc06 %}<td>Increase 2006</td><td>{{i.inc06}}</td></tr>{% endif %}
+{% block content %}
 
-                         {% if i.inc07 %}<tr><td>Increase 2007</td><td>{{i.inc07}}</td>{% endif %}</tr><tr>{% if i.inc08 %}<td>Increase 2008</td><td>{{i.inc08}}</td></tr>{% endif %}
-                         {% if i.inc08 %}<tr><td>Increase 2009</td><td>{{i.inc09}}</td>{% endif %}</tr><tr>{% if i.inc10 %}<td>Increase 2010</td><td>{{i.inc10}}</td></tr>{% endif %}
-                         {% if i.inc11 %}<tr><td>Increase 2011</td><td>{{i.inc11}}</td>{% endif %}</tr><tr>{% if i.inc12 %}<td>Increase 2012</td><td>{{i.inc12}}</td></tr>{% endif %}
-                         {% if i.inc13 %}<tr><td>Increase 2013</td><td>{{i.inc13}}</td>{% endif %}</tr><tr>{% if i.inc14 %}<td>Increase 2014</td><td>{{i.inc14}}</td></tr>{% endif %}
-                         {% if i.inc15 %}<tr><td>Increase 2015</td><td>{{i.inc15}}</td>{% endif %}</tr><tr>{% if i.inc16 %}<td>Increase 2016</td><td>{{i.inc16}}</td></tr>{% endif %}
-                         {% if i.inc17 %}<tr><td>Increase 2017</td><td>{{i.inc17}}</td>{% endif %}</tr><tr>{% if i.inc18 %}<td>Increase 2018</td><td>{{i.inc18}}</td></tr>{% endif %}
-                         {% if i.inc19 %}<tr><td>Increase 2019</td><td>{{i.inc19}}</td>{% endif %}</tr><tr>{% if i.inc21 %}<td>Increase 2021</td><td>{{i.inc21}}</td></tr>{% endif %}
-                         
-                         {% if i.ma2010 %}<tr><td>Medicall All 2010</td><td>{{i.ma2010}}</td>{% endif %}</tr><tr>{% if i.ma2015 %}<td>Medical All 2015</td><td>{{i.ma2015}}</td></tr>{% endif %}
-                         {% if i.np %}<tr><td> Monthly Pension(NP+MA) Payable</td><td>{{i.tp}}</td></tr>{% endif %}
-                        
-                        
-                          
-                    
-                            
-                       
-                        {% endfor %}
-                        {% endif %}
-                        
-                    </table>
-        </div>
-        <div class="table col"  width="600"  height="220"> 
-          <table class="table table-bordered"> {% for b in bank %}
-          <tr><td>Bank Name</td> <td>{{b.bname}}</td></tr>
-          <tr><td>Bank Branch</td> <td>{{b.bb}}</td></tr>
-          <tr><td>Bank Account</td> <td>{{b.acctno}}</td></tr>
+<div class="p-3">
+  <form action="candr" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-info">Pensioner ID</button>
+    <input type="integer" name="number" placeholder="Pensioner ID" required>
 
-          {% endfor %}</table></div>
-          <div class="col text-center"> 
+  </form>
+</div>
+<h1 class="centre" style="text-align:center;">Calculation & Review Sheet</h1>
+<div class="container">
+  <div class="row align-items-start">
 
-            <img  class="img-thumbnail rounded fload-end" src="{% static 'img/favicon.png' %}">
   
-            </div>
-        </div>
-        {% endblock content %}
-     
+  <div class="col-lg-10">
+    <table class="table table-borderless">
+      {% if pensioner %}
+      {% for i in pensioner %}
+
+      <tr>
+        <td>Name</td>
+        <td>{{i.name}}</td>
+      </tr>
+      <tr>
+        <td>Pay</td>
+        <td>{{i.pay|intcomma}}</td>
+      </tr>
+      <tr>
+        <td>Date of Birth</td>
+        <td>{{i.dob}}</td>
+      </tr>
+      <tr>
+        <td>Date of Appointment</td>
+        <td>{{i.doa}}</td>
+      </tr>
+      <tr>
+        <td>Date of Retirement</td>
+        <td>{{i.dor}}</td>
+      </tr>
+      <tr>
+        <td>Age on Retirement</td>
+        <td>{{i.age}}</td>
+      </tr>
+      <tr>
+        <td>Qualifying Service</td>
+        <td>{{i.qs}}</td>
+      </tr>
+      <tr>
+        <td>Commutation Rate</td>
+        <td>{{i.comm_rate}}</td>
+      </tr>
+      <tr>
+        <td>Restoration Due on </td>
+        <td>{{i.restd}}</td>
+      </tr>
+      <tr>
+        <td>Commutation</td>
+        <td>{{i.comm_amount|intcomma}}</td>
+      </tr>
+      <tr>
+        <td>Gross Pension</td>
+        <td>{{i.gp|intcomma}}</td>
+      </tr>
+      <tr>
+        <td>Net Pension</td>
+        <td>{{i.np|intcomma}}</td>
+      </tr>
+    </table>
+    {% endfor %}
+    {% endif %}
+  </div>
+  <div class="col">
+
+    <img class="img-thumbnail rounded fload-end" src="{% static 'img/favicon.png' %}">
+
+  </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row align-items-start">
+  <div class="col">
+    <table class="table table-borderless">
+      {% if pensioner %}
+      {% for i in pensioner %}
+      <tr>{% if i.inc03%}<td>Increase 2003</td>
+        <td>{{i.inc03}}</td>{% endif %}
+        {% if i.inc04 %}<td>Increase 2004</td>
+        <td>{{i.inc04}}</td>
+      </tr>{% endif %}
+
+      {% if i.inc05 %}<tr>
+        <td>Increase 2005</td>
+        <td>{{i.inc05}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc06 %}<td>Increase 2006</td>
+        <td>{{i.inc06}}</td>
+      </tr>{% endif %}
+
+      {% if i.inc07 %}<tr>
+        <td>Increase 2007</td>
+        <td>{{i.inc07}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc08 %}<td>Increase 2008</td>
+        <td>{{i.inc08}}</td>
+      </tr>{% endif %}
+      {% if i.inc08 %}<tr>
+        <td>Increase 2009</td>
+        <td>{{i.inc09}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc10 %}<td>Increase 2010</td>
+        <td>{{i.inc10}}</td>
+      </tr>{% endif %}
+      {% if i.inc11 %}<tr>
+        <td>Increase 2011</td>
+        <td>{{i.inc11}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc12 %}<td>Increase 2012</td>
+        <td>{{i.inc12}}</td>
+      </tr>{% endif %}
+      {% if i.inc13 %}<tr>
+        <td>Increase 2013</td>
+        <td>{{i.inc13}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc14 %}<td>Increase 2014</td>
+        <td>{{i.inc14}}</td>
+      </tr>{% endif %}
+      {% if i.inc15 %}<tr>
+        <td>Increase 2015</td>
+        <td>{{i.inc15}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc16 %}<td>Increase 2016</td>
+        <td>{{i.inc16}}</td>
+      </tr>{% endif %}
+      {% if i.inc17 %}<tr>
+        <td>Increase 2017</td>
+        <td>{{i.inc17}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc18 %}<td>Increase 2018</td>
+        <td>{{i.inc18}}</td>
+      </tr>{% endif %}
+      {% if i.inc19 %}<tr>
+        <td>Increase 2019</td>
+        <td>{{i.inc19}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.inc21 %}<td>Increase 2021</td>
+        <td>{{i.inc21}}</td>
+      </tr>{% endif %}
+
+      {% if i.ma2010 %}<tr>
+        <td>Medicall All 2010</td>
+        <td>{{i.ma2010}}</td>{% endif %}
+      </tr>
+      <tr>{% if i.ma2015 %}<td>Medical All 2015</td>
+        <td>{{i.ma2015}}</td>
+      </tr>{% endif %}
+      {% if i.np %}<tr>
+        <td> Monthly Pension(NP+MA) Payable</td>
+        <td>{{i.tp}}</td>
+      </tr>{% endif %}
+
+
+
+
+
+
+      {% endfor %}
+      {% endif %}
+
+    </table>
+  </div>
+  <div class="col">
+    <table class="table table-borderless"> {% for b in bank %}
+      <tr>
+        <td>Bank Name</td>
+        <td>{{b.bname}}</td>
+      </tr>
+      <tr>
+        <td>Bank Branch</td>
+        <td>{{b.bb}}</td>
+      </tr>
+      <tr>
+        <td>Bank Account</td>
+        <td>{{b.acctno}}</td>
+      </tr>
+  
+      {% endfor %}
+    </table>
+  </div>
+  </div>
+</div>
+
+
+</div>
+
+{% endblock content %}

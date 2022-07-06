@@ -1,6 +1,7 @@
 from pyexpat import model
 from django.db import models
 
+
 # Create your models here.
 class Pensioner(models.Model):
     name=models.CharField(max_length=200)
@@ -55,6 +56,7 @@ class Pensioner(models.Model):
     address=models.CharField(max_length=200, null=True)
     designation=models.CharField(max_length=50, null=True)
     restd=models.CharField(max_length=20,null=True)
+    
     
 
     
